@@ -6,6 +6,17 @@ $(document).ready(function() {
     $(this).toggleClass('expend_icn');            
     $(this).closest('.pdp_details_block').siblings().find('.pdp_details_block_head a').removeClass('expend_icn');
   });
+  $('* .prod-price').each(function () {
+    var item = $(this).text();
+    var num = Number(item).toLocaleString('vi');    
+    if (Number(item) < 0) {
+      num = num.replace('-','');
+      $(this).addClass('negMoney');
+    }else{
+      $(this).addClass('enMoney');
+    }    
+    $(this).text(num);
+  });
   $('.mobile-gallery').flexslider({animation: "fade", controlNav: false, slideshow: false, directionNav: true, controlNav: "thumbnails"}); $('.thumbnail-slider').bxSlider({mode: 'vertical', minSlides: 3, slideMargin: 10, infiniteLoop: false, pager: false, prevText: "", nextText: "", hideControlOnEnd: true });
   $("#newsletter_subscribe_popup > a").click(function() {
     $(this).attr("href", "javascript:void(0)");

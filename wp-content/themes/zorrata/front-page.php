@@ -53,7 +53,7 @@ get_header(); ?>
 	              <a href="<?php the_permalink(); ?>">
 	                <h3><?php the_title() ?></h3> </a>
 	              <div class="price">
-	                <div class="prod-price"><?php echo get_post_meta($pid, 'price', 1) ?>VND</div>
+	                <div class="prod-price"><?php echo get_post_meta($pid, 'price', 1) ?></div>
 	              </div>
 	            </div>
 	          </div>

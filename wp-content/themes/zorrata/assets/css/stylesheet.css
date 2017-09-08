@@ -1750,6 +1750,18 @@ p.empty-cart { text-align: center; margin-bottom: 0; }
 }
 
 .price { font-size: 12px; margin-top: 8px; /*font-family: 'Lato', sans-serif;*/ }
+.enMoney::after {
+    content:" VND";
+}
+.negMoney {
+    color:red;
+}
+div.negMoney::before {
+    content:'(';
+}
+div.negMoney::after {
+    content:') VND';
+}
 .compare-price, .product-price {  }
 .was, .product-compare-price, .compare-price { color: #ba2323; text-decoration: line-through; }
 .was { display: inline; margin-left: 5px; }

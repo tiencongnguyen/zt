@@ -27,7 +27,7 @@
                   <a href="<?php the_permalink();?>">
                     <h3><?php the_title();?></h3> </a>
                   <div class="price">
-                    <div class="prod-price"><?=$price?> VND</div>
+                    <div class="prod-price"><?=$price?></div>
                   </div>
                 </div>
               </div> <a class="fancybox.ajax product-modal" href="<?php the_permalink(); ?>?view=quick">Xem nhanh</a> </div>

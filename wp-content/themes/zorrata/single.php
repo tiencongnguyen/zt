@@ -30,17 +30,22 @@ get_header(); ?>
   <meta itemprop="url" content="<?php the_permalink(); ?>">
   <meta itemprop="image" content="<?php echo zorrataa_get_post_thumbnail (null, array(480,321)); ?>">
 
+  <?php 
+  // get list feature image
+  $featureImages = $dynamic_featured_image->get_featured_images();
+  ?>
   <!-- For Mobile -->
   <div id="mobile-product" class="mobile-3">
     <div class="mobile-gallery">
-      <ul class="slides">    
-        
-        <li data-thumb="http://cdn.shopify.com/s/files/1/1004/8438/products/160502_114755_7974_small.jpg?v=1483464399" data-image-id="11618379590"><img data-image-id="11618379590" src="https://cdn.shopify.com/s/files/1/1004/8438/products/160502_114755_7974_grande.jpg?v=1483464399" alt="Gold lion stack"></li>
-        
-        <li data-thumb="http://cdn.shopify.com/s/files/1/1004/8438/products/gold_lion_stack_small.jpg?v=1483464399" data-image-id="17513593094"><img data-image-id="17513593094" src="https://cdn.shopify.com/s/files/1/1004/8438/products/gold_lion_stack_grande.jpg?v=1483464399" alt="Gold lion stack"></li>
-        
-        <li data-thumb="http://cdn.shopify.com/s/files/1/1004/8438/products/BOX_77173a4a-ef6d-4dda-ac0a-2f63c2be7460_small.jpg?v=1483464405" data-image-id="21200797708"><img data-image-id="21200797708" src="https://cdn.shopify.com/s/files/1/1004/8438/products/BOX_77173a4a-ef6d-4dda-ac0a-2f63c2be7460_grande.jpg?v=1483464405" alt="Gold lion stack"></li>
-        
+      <ul class="slides">
+      	<li data-thumb="<?php the_post_thumbnail_url(null, 'zorrataa-thumbnail-image') ?>" data-image-id="<?=get_post_thumbnail_id()?>"><img data-image-id="<?=get_post_thumbnail_id()?>" src="<?php the_post_thumbnail_url(null, 'full') ?>" alt="<?php the_title() ?>"></li>
+        <?php 
+        foreach ($featureImages as $img) :
+        ?>
+      	<li data-thumb="<?=$img['thumb']?>" data-image-id="<?=$img['attachment_id']?>"><img data-image-id="<?=$img['attachment_id']?>" src="<?=$img['full']?>" alt="<?php the_title() ?>"></li>
+      	<?php
+        endforeach;
+        ?>        
       </ul>
     </div>  
   </div>
@@ -49,30 +54,26 @@ get_header(); ?>
   <div class="row">
     <div id="product-photos" class="desktop-8 tablet-3 mobile-3">
       <div class="bigimage desktop-10 tablet-5">
-        <span class="zoom_icn"><img src="https://cdn.shopify.com/s/files/1/1004/8438/t/11/assets/fullsize.svg" alt="" /></span>
-        <img id="<?=$pid?>" src="https://cdn.shopify.com/s/files/1/1004/8438/products/160502_114755_7974_1024x1024.jpg?v=1483464399" data-image-id="" data-zoom-image="http://cdn.shopify.com/s/files/1/1004/8438/products/160502_114755_7974.jpg?v=1483464399" alt='' title="Gold lion stack"/>
+        <span class="zoom_icn"><img src="<?php echo get_theme_file_uri('assets/images/fullsize.svg')?>" alt="" /></span>
+        <img id="<?=$pid?>" src="<?php the_post_thumbnail_url(null, 'zorrataa-single-image') ?>" data-image-id="" data-zoom-image="<?php the_post_thumbnail_url(null, 'full') ?>" alt='' title="<?php the_title() ?>"/>
       </div> 
 
       <div id="<?=$pid?>-gallery" class="desktop-2 tablet-1">	
         <div class="thumbnail-slider">
-          
           <div class="slide">
-            <a href="single.html#" data-image="http://cdn.shopify.com/s/files/1/1004/8438/products/160502_114755_7974_1024x1024.jpg?v=1483464399" data-image-id="11618379590" data-zoom-image="http://cdn.shopify.com/s/files/1/1004/8438/products/160502_114755_7974.jpg?v=1483464399">
-              <img class="thumbnail" src="https://cdn.shopify.com/s/files/1/1004/8438/products/160502_114755_7974_compact.jpg?v=1483464399" data-image-id="11618379590" alt="Gold lion stack" data-image-id="11618379590" />
+            <a href="#" data-image="<?php the_post_thumbnail_url(null, 'full')?>" data-image-id="" data-zoom-image="<?php the_post_thumbnail_url(null, 'full')?>">
+              <img class="thumbnail" src="<?php the_post_thumbnail_url(null, 'zorrataa-thumbnail-image')?>" data-image-id="<?=get_post_thumbnail_id()?>" alt="<?php the_title() ?>" data-image-id="<?=get_post_thumbnail_id()?>" />
             </a>
           </div>
-          
+          <?php 
+	        foreach ($featureImages as $img) :
+	        ?>
           <div class="slide">
-            <a href="single.html#" data-image="http://cdn.shopify.com/s/files/1/1004/8438/products/gold_lion_stack_1024x1024.jpg?v=1483464399" data-image-id="17513593094" data-zoom-image="http://cdn.shopify.com/s/files/1/1004/8438/products/gold_lion_stack.jpg?v=1483464399">
-              <img class="thumbnail" src="https://cdn.shopify.com/s/files/1/1004/8438/products/gold_lion_stack_compact.jpg?v=1483464399" data-image-id="17513593094" alt="Gold lion stack" data-image-id="17513593094" />
+            <a href="#" data-image="<?=$img['full']?>" data-image-id="" data-zoom-image="<?=$img['full']?>">
+              <img class="thumbnail" src="<?=$img['thumb']?>" data-image-id="<?=$img['attachment_id']?>" alt="<?php the_title() ?>" data-image-id="<?=$img['attachment_id']?>" />
             </a>
           </div>
-          
-          <div class="slide">
-            <a href="single.html#" data-image="http://cdn.shopify.com/s/files/1/1004/8438/products/BOX_77173a4a-ef6d-4dda-ac0a-2f63c2be7460_1024x1024.jpg?v=1483464405" data-image-id="21200797708" data-zoom-image="http://cdn.shopify.com/s/files/1/1004/8438/products/BOX_77173a4a-ef6d-4dda-ac0a-2f63c2be7460.jpg?v=1483464405">
-              <img class="thumbnail" src="https://cdn.shopify.com/s/files/1/1004/8438/products/BOX_77173a4a-ef6d-4dda-ac0a-2f63c2be7460_compact.jpg?v=1483464405" data-image-id="21200797708" alt="Gold lion stack" data-image-id="21200797708" />
-            </a>
-          </div>
+        <?php endforeach;?>
            
         </div>
       </div>
@@ -106,7 +107,7 @@ get_header(); ?>
         <h1 itemprop="name"><?php the_title(); ?></h1>
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
           <p id="product-price">
-            <span class="product-price" itemprop="price"><?=$price?> VND</span>
+            <span class="product-price prod-price" itemprop="price"><?=$price?></span>
           </p>
           <form action="https://www.zorrata.com/cart/add" method="post" data-money-format="${{amount}}" id="product-form-<?=$pid?>">
   					<div class="product-variants"></div><!-- product variants -->
@@ -126,59 +127,6 @@ get_header(); ?>
 
 					<script>
 					  // Shopify Product form requirement
-					  selectCallback = function(variant, selector) {
-					    var $product = $('#product-' + selector.product.id);    
-					    
-					    
-					    // BEGIN SWATCHES
-					    if (variant) {
-					      for (i=0;i<variant.options.length;i++) {
-					        jQuery('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]').prop('checked', true);
-					      }      
-					    }
-					    // END SWATCHES
-					    
-					    
-					    
-					    if (variant && variant.available == true) {
-					      if(variant.compare_at_price > variant.price){
-					        $('.was', $product).html(Shopify.formatMoney(variant.compare_at_price, $('form', $product).data('money-format')))        
-					      } else {
-					        $('.was', $product).text('')
-					      } 
-					      $('.product-price', $product).html(Shopify.formatMoney(variant.price, $('form', $product).data('money-format'))) 
-					      $('.add', $product).removeClass('disabled').removeAttr('disabled').val('Add to Cart');
-					    } else {
-					      var message = variant ? "Sold Out" : "Sold Out";
-					      $('.was', $product).text('')
-					      $('.product-price', $product).text(message);
-					      $('.add', $product).addClass('disabled').attr('disabled', 'disabled').val(message); 
-					    } 
-					    
-					    
-					    
-					    if (variant && variant.featured_image) {
-					      var original_image = $("#<?=$pid?>"), new_image = variant.featured_image;
-
-					                             
-					                             var $slider = $('.mobile-gallery');
-					      var original_image = $(".flex-active-slide img"), new_image = variant.featured_image;    
-					                               
-
-					      Shopify.Image.switchImage(new_image, original_image[0], function (new_image_src, original_image, element) {
-
-					        $(element).parents('a').attr('href', new_image_src);
-					        $(element).attr('src', new_image_src);   
-					        $(element).attr('data-image', new_image_src);   
-					        $(element).attr('data-zoom-image',new_image_src);
-
-					        $('.thumbnail[data-image-id="' + variant.featured_image.id + '"]').trigger('click');
-
-					                
-					        $slider.each(function() { $(this).flexslider($('[data-image-id="' + variant.featured_image.id + '"]').data('index')); });
- 								});
-					    }
-					  }; 
 					</script>
 					<script>$(window).load(function() { $('.selector-wrapper:eq()').hide(); });</script>   
         </div>
@@ -188,10 +136,10 @@ get_header(); ?>
         </div>
         <div class="desc">
           <div class="share-icons">
-					  <a title="Share on Facebook" href="https://www.facebook.com/sharer.php?u=<?php the_permalink()?>" class="facebook" target="_blank"><i class="icon-facebook icon-2x"></i></a>
-					  <a href="https://instagram.com/zorrata" target="_blank"><i class="icon-instagram icon-2x"></i></a>
+					  <a title="Chia sẻ trên Facebook" href="https://www.facebook.com/sharer.php?u=<?php the_permalink()?>" class="facebook" target="_blank"><i class="icon-facebook icon-2x"></i></a>
+					  <a title="Chia sẻ trên Instagram" href="https://instagram.com/" target="_blank"><i class="icon-instagram icon-2x"></i></a>
 					  
-					  <a title="Share on Twitter"  href="https://twitter.com/home?status=<?php the_permalink()?>" title="Share on Twitter" target="_blank" class="twitter"><i class="icon-twitter icon-2x"></i></a>
+					  <a title="Chia sẻ trên Twitter"  href="https://twitter.com/home?status=<?php the_permalink()?>" target="_blank" class="twitter"><i class="icon-twitter icon-2x"></i></a>
 					</div>
         </div>
       </div>
@@ -219,7 +167,7 @@ get_header(); ?>
                 <a href="<?php the_permalink (); ?>">
                   <h3><?php the_title()?></h3> </a>
                 <div class="price">
-                  <div class="prod-price"><?=$price?> VND</div>
+                  <div class="prod-price"><?=$price?></div>
                 </div>
               </div>
             </div>

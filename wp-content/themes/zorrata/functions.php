@@ -52,7 +52,8 @@ function zorrataa_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	add_image_size( 'zorrataa-featured-image', 1920, 475, true );
-	add_image_size( 'zorrataa-thumbnail-avatar', 480, 321, true );
+	add_image_size( 'zorrataa-single-image', 600, 400, true );
+	add_image_size( 'zorrataa-archive-avatar', 480, 321, true );
 	add_image_size( 'zorrataa-thumbnail-image', 160, 160, true );
 
 	// Set the default content width.
@@ -492,9 +493,9 @@ function zorrataa_accordion_shortcode( $atts, $content = null ) {
 add_shortcode( 'prd_description', 'zorrataa_accordion_shortcode' );
 
 function zorrataa_process_shortcode( $atts, $content = null ) {
-	return '<div class="pdp_details_block_head">
+	return '<div class="pdp_details_block"><div class="pdp_details_block_head">
             	<a href="javascript:void(0);" class=""><i class="icon-minus"></i><i class="icon-plus"></i>'. $atts['title'] . '</a></div>
-                <div class="pdp_details_block_content" >' . $content . '</div>';
+                <div class="pdp_details_block_content" >' . $content . '</div></div>';
 }
 add_shortcode( 'attribute', 'zorrataa_process_shortcode' );
 // Enable shortcodes in text widgets
