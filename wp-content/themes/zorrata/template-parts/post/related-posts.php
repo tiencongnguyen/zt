@@ -30,7 +30,8 @@
                     <div class="prod-price"><?=$price?></div>
                   </div>
                 </div>
-              </div> <a class="fancybox.ajax product-modal" href="<?php the_permalink(); ?>?view=quick">Xem nhanh</a> </div>
+              </div>
+            </div>
           </div>
         <?php 
         endwhile;

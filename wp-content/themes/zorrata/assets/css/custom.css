@@ -1254,17 +1254,23 @@ iframe{display:none;}
     float: left;
   background:#ffffff;
 }
-.product-add input[type="submit"].add {
+.product-add .product-modal {
+    display: block;
     margin-top: 17px!important;
   	margin-bottom:4px;
     float: left;
     width: 100%!important;
     max-width: initial!important;
     height: 56px;
-    font-size: 14px;
+    line-height: 56px;
+    font-weight: bold;
+    font-size: 15px;
     letter-spacing: 1px;
     clear: both;
   	outline:0;
+    position: relative;
+    left: 0px;
+    bottom: 0px;
 }
 .pdp_details{
   float:left;

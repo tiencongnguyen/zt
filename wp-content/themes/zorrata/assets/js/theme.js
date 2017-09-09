@@ -165,7 +165,6 @@ $(document).ready(function() {
     autoPlay : 3000,
     stopOnHover : true
   });
-   
   
   // Custom Navigation Events
   $(".next").click(function(){
@@ -174,8 +173,6 @@ $(document).ready(function() {
   $(".prev").click(function(){
     owl.trigger('owl.prev');
   })
-  
-  
   
   // Call Fancybox globally on all elemnets with class "fancybox"
   $(".fancybox").fancybox({
@@ -186,7 +183,6 @@ $(document).ready(function() {
 
     }
   });  
-  
 
   // Call Fancybox for product modal + stop scroll to top 
   $('.product-modal').fancybox({
@@ -196,15 +192,6 @@ $(document).ready(function() {
       }
     }
   });
-  
-  // Call Fancybox for search & mailing list signup + stop scroll to top   
-//   $(".open_popup").fancybox({
-//     helpers: {
-//       overlay: {
-//         locked: false
-//       }
-//     }
-//   });
   // open search form inslide navigation
   $('#inline').click(function(){
     $('.desktop_search').fadeIn();
@@ -228,8 +215,6 @@ $(document).ready(function() {
     directionNav: true
   });
   
-
-  
   // Scroll to top button
   $(window).scroll(function(){
     if ($(this).scrollTop() > 100) {
@@ -244,18 +229,11 @@ $(document).ready(function() {
     return false;
   });
   
-  
-  
   // Product Image thumbnail change to main window
   $('.thumbs img').click( function() {
     $('#bigimage img').prop('src', $(this).prop('src'));
     return true;  //stop link from navigating
-  }) 
-  
-  
-  // Add to cart from anywhere
-  $('.add').on('click', addToCart ); 
-  
+  })     
   
   // Sidebar Toggle for screens below 980px wide
   var $Sidebar = $("#sidebar");
@@ -280,125 +258,6 @@ function showsearchpopup(){
   
   }
 }
-
-
-// Manage Quick Cart + Add form wherever
-
-function addToCart(e){
-  
-  if (typeof e !== 'undefined') e.preventDefault();
-  
-  var form      = $(this).parents('form');
-  
-  $.ajax({
-    type: 'POST',
-    url: '/cart/add.js',
-    async: false,
-    data: form.serialize(),
-    dataType: 'json',
-    error: addToCartFail,
-    success: addToCartSuccess,
-    cache: false
-  });
-  
-}
-
-function addToCartSuccess (jqXHR, textStatus, errorThrown){
-  
-  $.ajax({
-    type: 'GET',
-    url: '/cart.js',
-    async: false,
-    cache: false,
-    dataType: 'json',
-    success: updateCartDesc
-  });
-  $("html, body").animate({ scrollTop: 0 }, 600);    
-  $(document).find('.fancybox-close').trigger('click');
-
-  $('#crt').css('display', 'block');
-  $(".cart-mid").mCustomScrollbar();
-//     {
-//              scrollButtons:{enable:true,scrollType:"stepped"},
-//              keyboard:{scrollType:"stepped"},
-//              mouseWheel:{scrollAmount:188,normalizeDelta:true},
-//              theme:"rounded-dark",
-//              autoExpandScrollbar:true,
-//              snapAmount:188,
-//              snapOffset:65
-//            });
-
-  setTimeout(function () { 
-    $('#crt').css('display','none');
-  }, 3000);  
-
-  
-  
-
-  $('.add-to-cart-msg').hide().addClass('success').html("Item Added \n  \u003ca href=\"\/cart\"\u003eView Cart and Check out!\u003c\/a\u003e\n  ").fadeIn().delay(3000).fadeOut();
-}
-
-function addToCartFail(jqXHR, textStatus, errorThrown){
-  var response = $.parseJSON(jqXHR.responseText);
-  $('.add-to-cart-msg').addClass('error').text(response.description).fadeIn().delay(3000).fadeOut();
-}
-
-function updateCartDesc(data){
-  $('#item_count').text(data.item_count);
-  renderHoverCart(data);
-  console.log(data);
-   $('#crt').css('display', 'block');
-
-  setTimeout(function () { 
-    $('#crt').css('display','none');
-  }, 3000);  
-}
-
-function renderHoverCart(cart) {
-  var source = $("#cartTemplate").html();
-  var template = Handlebars.compile(source);
-  var items = [];
-  $.each(cart.items, function(i,o){
-    items.push({
-      id: o.id,
-      title: o.title,
-      url: o.url,      
-      price: Shopify.api.formatMoney(o.price),
-      image: o.image.replace(/\.jpg/,"_small.jpg"),
-      qty: o.quantity      
-    });
-  });
-  $("#crt").html( template({items: items}) );
-  $('.mc-total-count').html(cart.item_count);
-//   $('.cart-footer .total-value').text(cart.total_price);
-   var resultprice = cart.total_price/100;
-              resultprice = resultprice.toFixed(2);
-              $('.cart-footer .total-value').text("$"+ resultprice);
-}
-
-$(function(){
-  
-  $("#crt").on('click', "a.remove_item", function(){
-    console.log("removing item");
-    var id = $(this).data("id");
-    Shopify.api.changeItem(id,0, function(c){
-      $('#item_count').text(c.item_count);
-      if(!c.item_count) {        
-        $(".cart-sections").html("").hide();
-        $('.empty-cart.withajaxload').show();
-        $("body").removeClass('bodyOverflow');
-        $('.mc-total-count').text('0');
-        $('.cart-footer .total-value').text("$0.00");
-        $('.checkout-link').hide();
-      } else {
-        renderHoverCart(c);
-      }
-    });
-  });
-  
-}); 
-
-
   
   /**
 * jquery.matchHeight-min.js v0.5.2

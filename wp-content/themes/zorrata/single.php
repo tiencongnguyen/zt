@@ -28,7 +28,7 @@ get_header(); ?>
 			?>
 	<div itemscope itemtype="http://schema.org/Product" id="product-<?=$pid?>">
   <meta itemprop="url" content="<?php the_permalink(); ?>">
-  <meta itemprop="image" content="<?php echo zorrataa_get_post_thumbnail (null, array(480,321)); ?>">
+  <meta itemprop="image" content="<?php the_post_thumbnail_url (null, 'zorrataa-single-image'); ?>">
 
   <?php 
   // get list feature image
@@ -38,7 +38,7 @@ get_header(); ?>
   <div id="mobile-product" class="mobile-3">
     <div class="mobile-gallery">
       <ul class="slides">
-      	<li data-thumb="<?php the_post_thumbnail_url(null, 'zorrataa-thumbnail-image') ?>" data-image-id="<?=get_post_thumbnail_id()?>"><img data-image-id="<?=get_post_thumbnail_id()?>" src="<?php the_post_thumbnail_url(null, 'full') ?>" alt="<?php the_title() ?>"></li>
+      	<li data-thumb="<?php the_post_thumbnail_url(null, 'zorrataa-thumbnail-image') ?>" data-image-id="<?=get_post_thumbnail_id()?>"><img data-image-id="<?=get_post_thumbnail_id()?>" src="<?php the_post_thumbnail_url(null, 'zorrataa-single-image') ?>" alt="<?php the_title() ?>"></li>
         <?php 
         foreach ($featureImages as $img) :
         ?>
@@ -81,24 +81,10 @@ get_header(); ?>
     <script type="text/javascript">
       $(document).ready(function () {
         //initiate the plugin and pass the id of the div containing gallery images
-        $("#<?=$pid?>").elevateZoom({
-          gallery:'<?=$pid?>-gallery',
-          cursor: 'pointer', 
-          galleryActiveClass: 'active', 
-          borderColour: '#eee', 
-          borderSize: '1',
-          zoomWindowWidth:"430",
-          zoomWindowHeight:"465",
-          zoomWindowFadeIn: 500,
-          zoomWindowFadeOut: 750
-          }); 
+        $("#<?=$pid?>").elevateZoom({gallery:'<?=$pid?>-gallery', cursor: 'pointer', galleryActiveClass: 'active', borderColour: '#eee', borderSize: '1', zoomWindowWidth:"430", zoomWindowHeight:"465", zoomWindowFadeIn: 500, zoomWindowFadeOut: 750 });
 
         //pass the images to Fancybox
-        $("#<?=$pid?>").bind("click", function(e) {  
-          var ez =   $('#<?=$pid?>').data('elevateZoom');	
-          $.fancybox(ez.getGalleryList());
-        return false;
-      });	  
+        $("#<?=$pid?>").bind("click", function(e) {var ez =   $('#<?=$pid?>').data('elevateZoom'); $.fancybox(ez.getGalleryList()); return false; });
 
       }); 
     </script>
@@ -118,17 +104,14 @@ get_header(); ?>
 					      <a href="javascript:void(0);" class="up" field="quantity"><i class="icon-plus"></i></a>
 					    </div>
 					      
-					    <div class="product-add-cart"><input type="submit" name="button" class="add" value="Mua ngay" /></div>
+					    <div class="product-add-cart">
+					    	<!-- <input type="submit" name="button" class="add" value="Mua ngay" /> -->
+					    	<a class=" button product-modal" href="#checkout">Mua ngay</a>
+					    </div>
 					  </div>
 					  <p class="add-to-cart-msg"></p> 
 					  
-					</form>    
-
-
-					<script>
-					  // Shopify Product form requirement
-					</script>
-					<script>$(window).load(function() { $('.selector-wrapper:eq()').hide(); });</script>   
+					</form>
         </div>
 
         <div class="pdp_details rrt">
@@ -190,5 +173,16 @@ get_header(); ?>
 	</div>
 	<div class="clear"></div>
 </div>
-
+<div id="checkout" style="display: none;">
+	<p>Gọi cho chúng tôi <a href="tel:0938271989">0938271989</a></p>
+	<p>Vui lòng để lại số điện thoại hoặc email chúng tôi sẽ liên hệ lại với bạn ngay</p>
+	<form rol="checkout">
+		<label>Vui lòng để lại thông tin chúng tôi sẽ liên hệ với bạn</label>
+		<label>Số điện thoại</label>
+		<input type="text" name="phonenumber">
+		<label>Email</label>
+		<input type="email" name="email">
+		<input type="submit" name="submit" value="Đồng ý">
+	</form>
+</div>
 <?php get_footer();
