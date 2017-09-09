@@ -52,12 +52,12 @@ get_header(); ?>
                 <a href="<?php the_permalink() ?>">
                   <h3><?=$title?></h3> </a>
                 <div class="price">
-                  <div class="prod-price"><?=$price?> VND</div>
+                  <div class="prod-price"><?=$price?></div>
                 </div>
               </div>
             </div>
-            <form method="post" action="https://www.zorrata.com/cart/add">
-              <input type="hidden" name="id" value="<?=$pid?>" /> <a class="product-modal add" href="javascript:void(0);">Mua ngay</a> </form>
+            <!-- <form method="post" action="https://www.zorrata.com/cart/add">
+              <input type="hidden" name="id" value="<?=$pid?>" /> <a class="product-modal add" href="javascript:void(0);">Mua ngay</a> </form> -->
           </div>
         </div>
 			<?php
